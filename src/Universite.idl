@@ -1,0 +1,40 @@
+module Universite {
+    // Define a struct for a single Epreuve (exam)
+    struct Epreuve {
+        string nomEpreuve;  // Name of the exam
+        float note;         // Score for the exam
+        float coefficient;  // Weight of the exam in the average
+    };
+
+    // Define a struct for a Book
+    struct Book {
+        string nomLivre;         // Book name
+        string auteur;           // Author of the book
+        string collection;       // Book collection/series
+        string datePublication;  // Publication date
+    };
+
+    // Define a sequence for a list of strings (e.g., exam names)
+    typedef sequence<string> StringList;
+
+    // Etudiant interface with attributes and methods
+    interface Etudiant {
+        // Attributes
+        readonly attribute string nom;
+        readonly attribute string prenom;
+        readonly attribute long numeroEtudiant;  // Use long here instead of int
+
+        // Methods
+        void Ajouter_une_epreuve(in Epreuve epreuve);
+        StringList Liste_des_epreuves();  // Use the typedef here
+        float Calculer_la_moyenne();
+        void Emprunter_un_livre(in Book livre);
+    };
+
+    // Promotion interface
+    interface Promotion {
+        void ajouter_un_etudiant(in string nom, in string prenom, in long numEtudiant);  // Use long here
+        Etudiant rechercher_un_etudiant(in long numEtudiant);  // Use long here
+        float calculer_moyenne_de_la_promotion();
+    };
+};
